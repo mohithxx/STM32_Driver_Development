@@ -19,6 +19,64 @@
 
 #include <stdint.h>
 
+
+/* ========================================================================== */
+/* IRQ NUMBERS                           */
+/* ========================================================================== */
+#define IRQ_NO_EXTI0        6
+#define IRQ_NO_EXTI1        7
+#define IRQ_NO_EXTI2        8
+#define IRQ_NO_EXTI3        9
+#define IRQ_NO_EXTI4        10
+#define IRQ_NO_EXTI9_5      11
+#define IRQ_NO_EXTI15_10    40
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========================================================================== */
+/* ARM Cortex Registers                                                       */
+/* ========================================================================== */
+#define NVIC_ISER0_BASE_ADR 0xE000E100
+#define NVIC_ISER1_BASE_ADR 0xE000E104
+#define NVIC_ISER2_BASE_ADR 0xE000E108
+#define NVIC_ISER3_BASE_ADR 0xE000E10C
+
+
+#define NVIC_ISER0     ((_vol uint32_t*)NVIC_ISER0_BASE_ADR)
+#define NVIC_ISER1     ((_vol uint32_t*)NVIC_ISER1_BASE_ADR)
+#define NVIC_ISER2     ((_vol uint32_t*)NVIC_ISER2_BASE_ADR)
+#define NVIC_ISER3     ((_vol uint32_t*)NVIC_ISER3_BASE_ADR)
+
+
+
+#define NVIC_ICER0_BASE_ADR 0xE000E180
+#define NVIC_ICER1_BASE_ADR 0xE000E184
+#define NVIC_ICER2_BASE_ADR 0xE000E188
+#define NVIC_ICER3_BASE_ADR 0xE000E18C
+
+
+#define NVIC_ICER0     ((_vol uint32_t*)NVIC_ICER0_BASE_ADR)
+#define NVIC_ICER1     ((_vol uint32_t*)NVIC_ICER1_BASE_ADR)
+#define NVIC_ICER2     ((_vol uint32_t*)NVIC_ICER2_BASE_ADR)
+#define NVIC_ICER3     ((_vol uint32_t*)NVIC_ICER3_BASE_ADR)
+
+
+
+
+
+
+
+
+
 /* ========================================================================== */
 /* GENERIC DEFINITIONS                              */
 /* ========================================================================== */

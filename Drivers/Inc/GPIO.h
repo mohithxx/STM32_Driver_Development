@@ -8,6 +8,7 @@
 #ifndef INC_GPIO_H_
 #define INC_GPIO_H_
 #include "stm32f446zxx.h"
+#include <stdint.h>
 
 /* GPIO Port Mode (MODER) */
 #define GPIO_MODE_INPUT      0 /* Reset State */
@@ -79,5 +80,8 @@ void GPIO_WriteToPin(GPIO_RegDef_t* pGPIOx,uint8_t pinNumber,uint8_t value);
 void GPIO_WriteToPort(GPIO_RegDef_t* pGPIOx, uint16_t value);
 uint8_t GPIO_ReadPin(GPIO_RegDef_t* pGPIOx,uint8_t pinNumber);
 uint16_t GPIO_ReadPort(GPIO_RegDef_t* pGPIOx);
+
+
+
 
 #endif /* INC_GPIO_H_ */
