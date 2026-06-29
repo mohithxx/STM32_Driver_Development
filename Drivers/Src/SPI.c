@@ -118,4 +118,3 @@ void SPI_Receive(SPI_Handler *pSPIx, uint8_t *pBuffer, uint32_t Len){
         }
     }
 }
-
