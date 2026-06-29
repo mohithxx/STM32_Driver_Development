@@ -76,7 +76,7 @@ void GPIO_ClockControl(GPIO_RegDef_t* pGPIOx, uint8_t EN_DI );
 void GPIO_init(GPIO_Handle_t* GPIO_Handle);
 void GPIO_deInit(GPIO_RegDef_t* pGPIOx);
 void GPIO_WriteToPin(GPIO_RegDef_t* pGPIOx,uint8_t pinNumber,uint8_t value);
-void GPIO_WriteToPort(GPIO_RegDef_t* pGPIOx, uint8_t value);
+void GPIO_WriteToPort(GPIO_RegDef_t* pGPIOx, uint16_t value);
 uint8_t GPIO_ReadPin(GPIO_RegDef_t* pGPIOx,uint8_t pinNumber);
 uint16_t GPIO_ReadPort(GPIO_RegDef_t* pGPIOx);
 

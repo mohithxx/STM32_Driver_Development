@@ -41,13 +41,24 @@ set(cpu_PARAMS
 )
 
 # Sources
+# set(sources_SRCS
+# 	${CMAKE_CURRENT_SOURCE_DIR}/Src/main.c
+# )
+file(GLOB_RECURSE DRIVER_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/Src/*.c
+)
+
 set(sources_SRCS
-	${CMAKE_CURRENT_SOURCE_DIR}/Src/main.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Src/main.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Src/syscall.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Src/sysmem.c
+    ${DRIVER_SOURCES}
 )
 
 # Include directories for all compilers
 set(include_DIRS
-	${CMAKE_CURRENT_SOURCE_DIR}/Inc
+    ${CMAKE_CURRENT_SOURCE_DIR}/Inc
+    ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/Inc
 )
 
 # Include directories for each compiler

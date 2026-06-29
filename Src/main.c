@@ -16,10 +16,19 @@
  ******************************************************************************
  */
 
+#include "SPI.h"
+#include "stm32f446zxx.h"
 #include <stdint.h>
+
+
 
 int main(void)
 {
+
+    
+    
+
+
     /* Loop forever */
 	for(;;);
 }
