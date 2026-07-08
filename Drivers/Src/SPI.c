@@ -10,8 +10,13 @@
 #include "stm32f446zxx.h"
 #include <stdint.h>
 
-static void SPI_Enable(SPI_RegDef_t* pSPIx, uint8_t EN_DI){
-    pSPIx->CR1 |= (EN_DI << 6);
+
+static void SPI_Enable(SPI_RegDef_t* pSPIx, uint8_t EN_DI) {
+    if (EN_DI == ENABLE) {
+        pSPIx->CR1 |= (1 << 6); // Set SPE bit
+    } else {
+        pSPIx->CR1 &= ~(1 << 6); // Clear SPE bit
+    }
 }
 
 void SPI_ClockControl(SPI_Handler* pSPIx, uint8_t EN_DI)
@@ -59,8 +64,8 @@ void SPI_init(SPI_Handler* pSPIx){
     //6. SSM bit
     temp |= (pSPIx->pConfig.SSM << SPI_CR1_SSM);
 
-    //7. DFF
-    temp &= ~(pSPIx->pConfig.SPI_DFF << SPI_CR1_DFF);
+    // 7. DFF
+    temp |= (pSPIx->pConfig.SPI_DFF << SPI_CR1_DFF);
 
     pSPIx->pSPIx->CR1 &= ~(0x7FF);
     pSPIx->pSPIx->CR1 = temp;
@@ -99,22 +104,71 @@ void SPI_Send(SPI_Handler* pSPIx, uint8_t *pBuffer, uint32_t Len) {
     // 2. Safe Guard: Wait until SPI is completely finished transmitting over the wire
     while( pSPIx->pSPIx->SR & (1U << SPI_SR_BSY) );
 }
-
-void SPI_Receive(SPI_Handler *pSPIx, uint8_t *pBuffer, uint32_t Len){
+void SPI_Receive(SPI_Handler *pSPIx, uint8_t *pBuffer, uint32_t Len) {
     while (Len > 0) {
-        // Wait until RXNE (Receive buffer not empty) flag is SET
+        // 1. Send a dummy byte to generate the clock ticks
+        // Wait for TXE to be ready
+        while( !(pSPIx->pSPIx->SR & (1U << SPI_SR_TXE)) );
+        
+        if ((pSPIx->pSPIx->CR1 & (1U << SPI_CR1_DFF)) == 0) {
+            pSPIx->pSPIx->DR = 0xFF; // 8-bit dummy data
+        } else {
+            pSPIx->pSPIx->DR = 0xFFFF; // 16-bit dummy data
+        }
+
+        // 2. Now wait for the incoming data to shift in
         while( !(pSPIx->pSPIx->SR & (1U << SPI_SR_RXNE)) );
 
+        // 3. Read the data
         if ((pSPIx->pSPIx->CR1 & (1U << SPI_CR1_DFF)) == 0) {
-            // 8-bit Data Frame
             *pBuffer = pSPIx->pSPIx->DR;
             pBuffer++;
             Len--;
         } else {
-            // 16-bit Data Frame
             *((uint16_t*)pBuffer) = pSPIx->pSPIx->DR;    
             pBuffer += 2;
             Len -= 2;
         }
     }
+}
+uint8_t SPI_SendDataIT(SPI_Handler* pSPIx,uint8_t *pBuffer,uint32_t Len){
+    uint8_t state = pSPIx->TxState;
+
+    if (state != SPI_BSY_IN_TX){
+        
+    //1. save the Tx buffer address and len info
+    pSPIx->pTxBuffer = pBuffer;
+    pSPIx->TxLen = Len;
+
+    //2. mark the SPI state as busy
+    pSPIx->TxState = SPI_BSY_IN_TX;
+
+    //3. Enable the TXEIE control bit to get interrupt whenever TXE flag is set in S
+    pSPIx->pSPIx->CR2 |= (1 << SPI_CR2_TXEIE);
+    }
+
+    return state;
+}
+
+uint8_t SPI_ReceiveDataIT(SPI_Handler* pSPIx,uint8_t *pBuffer,uint32_t Len){
+    uint8_t state = pSPIx->RxState;
+    if(state != SPI_BSY_IN_RX){
+        //1. save the Tx buffer address and len info
+        pSPIx->pRxBuffer = pBuffer;
+        pSPIx->RxLen = Len;
+
+        //2. mark the SPI state as busy
+        pSPIx->RxState = SPI_BSY_IN_RX;
+
+        //3. Enable the TXEIE control bit to get interrupt whenever TXE flag is set in SR
+        pSPIx->pSPIx->CR2 |= (1 << SPI_CR2_RXNEIE);
+        
+        
+    }
+    return state;
+}
+
+
+void SPI_IRQHandler(SPI_Handler *pSPIx){
+    
 }

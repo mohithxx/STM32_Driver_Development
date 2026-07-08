@@ -31,6 +31,12 @@
 #define IRQ_NO_EXTI9_5      11
 #define IRQ_NO_EXTI15_10    40
 
+#define IRQ_NO_SPI1         35
+#define IRQ_NO_SPI2         36
+#define IRQ_NO_SPI3         51
+
+
+
 
 
 
@@ -70,9 +76,19 @@
 #define NVIC_ICER3     ((_vol uint32_t*)NVIC_ICER3_BASE_ADR)
 
 
+#define NVIC_IPR0_BASE_ADR 0xE000E400
+#define NVIC_IPR1_BASE_ADR 0xE000E404
+#define NVIC_IPR2_BASE_ADR 0xE000E408
+#define NVIC_IPR3_BASE_ADR 0xE000E40C
 
 
+#define NVIC_IPR0     ((_vol uint32_t*)NVIC_IPR0_BASE_ADR)
+#define NVIC_IPR1     ((_vol uint32_t*)NVIC_IPR1_BASE_ADR)
+#define NVIC_IPR2     ((_vol uint32_t*)NVIC_IPR2_BASE_ADR)
+#define NVIC_IPR3     ((_vol uint32_t*)NVIC_IPR3_BASE_ADR)
 
+
+#define NO_PR_BITS_IMPLEMENTED  4   
 
 
 
@@ -279,6 +295,11 @@ typedef struct {
 
 #define CPHA_FIRST_EDGE 0
 #define CPHA_SEC_EDGE	1
+
+#define SPI_READY       0
+#define SPI_BSY_IN_TX    1
+#define SPI_BSY_IN_RX    2
+
 
 
 /* SPI Bit Position Definitions */

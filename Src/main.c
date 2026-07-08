@@ -16,19 +16,56 @@
  ******************************************************************************
  */
 
+#include "GPIO.h"
 #include "SPI.h"
 #include "stm32f446zxx.h"
+#include "stm32f446zxx_nvic.h"
 #include <stdint.h>
 
 
+#include <stdint.h>
+// Include your custom device header here, e.g., #include "stm32f4xx.h"
 
-int main(void)
-{
+void SPIinit(SPI_config_t* pSPIx){
+    pSPIx->SPI_DeviceMode = MASTER;
+    pSPIx->SPI_BusConfig = FULL_DUPLEX;
+    pSPIx->SPI_DFF = DFF_8B;
+    pSPIx->CPOL = CPOL_IDLE_LOW;
+    pSPIx->CPHA = CPHA_FIRST_EDGE;
+    pSPIx->Speed = FCLK_2;
+    pSPIx->SSM = SSM_EN;
+   
+}
 
+void SPI_IRQHandler(SPI_Handler* pSPIx){
+    
+}
+
+int main(void) {
+    SPI_Handler master;
+    SPIinit(&master.pConfig);
+    master.pSPIx = SPI1;
+
+    SPI_ClockControl(&master, ENABLE);
+    SPI_init(&master);
+
+    char buffer[] = "Hello";
+    int size = sizeof(buffer)/sizeof(buffer[0]);
+    SPI_Send(&master, (uint8_t*)buffer, size);
+
+    master.pSPIx->CR2 |= (1 << SPI_CR2_TXEIE);
     
     
+    NVIC_IRQ_PrioConfig(IRQ_NO_SPI1, 2);
+    NVIC_IRQConfig(IRQ_NO_SPI1, ENABLE);
+
+
 
 
     /* Loop forever */
-	for(;;);
+    for(;;) {
+        // Application code goes here
+    }
+    
+    return 0;
 }

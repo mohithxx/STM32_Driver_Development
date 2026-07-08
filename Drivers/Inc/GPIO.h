@@ -82,6 +82,7 @@ uint8_t GPIO_ReadPin(GPIO_RegDef_t* pGPIOx,uint8_t pinNumber);
 uint16_t GPIO_ReadPort(GPIO_RegDef_t* pGPIOx);
 
 
+void GPIO_IRQHandler(uint8_t pinNuber);
 
 
 #endif /* INC_GPIO_H_ */

@@ -29,6 +29,12 @@ typedef struct{
 typedef struct{
 	SPI_RegDef_t* pSPIx;
 	SPI_config_t pConfig;
+	uint8_t *pTxBuffer;
+	uint8_t *pRxBuffer;
+	uint32_t TxLen;
+	uint32_t RxLen;
+	uint8_t TxState;
+	uint8_t RxState;
 }SPI_Handler;
 
 
@@ -39,6 +45,8 @@ void SPI_Dinit(SPI_Handler* pSPIx);
 
 void SPI_Send(SPI_Handler* pSPIx,uint8_t *pBuffer,uint32_t Len);
 void SPI_Receive(SPI_Handler* pSPIx,uint8_t *pBuffer,uint32_t Len);
-
+void SPI_IRQHandler(SPI_Handler* pSPIx);
+uint8_t SPI_SendDataIT(SPI_Handler* pSPIx,uint8_t *pBuffer,uint32_t Len);
+uint8_t SPI_ReceiveDataIT(SPI_Handler* pSPIx,uint8_t *pBuffer,uint32_t Len);
 
 #endif /* INC_SPI_H_ */
