@@ -19,6 +19,80 @@
 
 #include <stdint.h>
 
+
+/* ========================================================================== */
+/* IRQ NUMBERS                           */
+/* ========================================================================== */
+#define IRQ_NO_EXTI0        6
+#define IRQ_NO_EXTI1        7
+#define IRQ_NO_EXTI2        8
+#define IRQ_NO_EXTI3        9
+#define IRQ_NO_EXTI4        10
+#define IRQ_NO_EXTI9_5      11
+#define IRQ_NO_EXTI15_10    40
+
+#define IRQ_NO_SPI1         35
+#define IRQ_NO_SPI2         36
+#define IRQ_NO_SPI3         51
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========================================================================== */
+/* ARM Cortex Registers                                                       */
+/* ========================================================================== */
+#define NVIC_ISER0_BASE_ADR 0xE000E100
+#define NVIC_ISER1_BASE_ADR 0xE000E104
+#define NVIC_ISER2_BASE_ADR 0xE000E108
+#define NVIC_ISER3_BASE_ADR 0xE000E10C
+
+
+#define NVIC_ISER0     ((_vol uint32_t*)NVIC_ISER0_BASE_ADR)
+#define NVIC_ISER1     ((_vol uint32_t*)NVIC_ISER1_BASE_ADR)
+#define NVIC_ISER2     ((_vol uint32_t*)NVIC_ISER2_BASE_ADR)
+#define NVIC_ISER3     ((_vol uint32_t*)NVIC_ISER3_BASE_ADR)
+
+
+
+#define NVIC_ICER0_BASE_ADR 0xE000E180
+#define NVIC_ICER1_BASE_ADR 0xE000E184
+#define NVIC_ICER2_BASE_ADR 0xE000E188
+#define NVIC_ICER3_BASE_ADR 0xE000E18C
+
+
+#define NVIC_ICER0     ((_vol uint32_t*)NVIC_ICER0_BASE_ADR)
+#define NVIC_ICER1     ((_vol uint32_t*)NVIC_ICER1_BASE_ADR)
+#define NVIC_ICER2     ((_vol uint32_t*)NVIC_ICER2_BASE_ADR)
+#define NVIC_ICER3     ((_vol uint32_t*)NVIC_ICER3_BASE_ADR)
+
+
+#define NVIC_IPR0_BASE_ADR 0xE000E400
+#define NVIC_IPR1_BASE_ADR 0xE000E404
+#define NVIC_IPR2_BASE_ADR 0xE000E408
+#define NVIC_IPR3_BASE_ADR 0xE000E40C
+
+
+#define NVIC_IPR0     ((_vol uint32_t*)NVIC_IPR0_BASE_ADR)
+#define NVIC_IPR1     ((_vol uint32_t*)NVIC_IPR1_BASE_ADR)
+#define NVIC_IPR2     ((_vol uint32_t*)NVIC_IPR2_BASE_ADR)
+#define NVIC_IPR3     ((_vol uint32_t*)NVIC_IPR3_BASE_ADR)
+
+
+#define NO_PR_BITS_IMPLEMENTED  4   
+
+
+
+
 /* ========================================================================== */
 /* GENERIC DEFINITIONS                              */
 /* ========================================================================== */
@@ -221,6 +295,11 @@ typedef struct {
 
 #define CPHA_FIRST_EDGE 0
 #define CPHA_SEC_EDGE	1
+
+#define SPI_READY       0
+#define SPI_BSY_IN_TX    1
+#define SPI_BSY_IN_RX    2
+
 
 
 /* SPI Bit Position Definitions */

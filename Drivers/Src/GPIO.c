@@ -134,3 +134,9 @@ uint16_t GPIO_ReadPort(GPIO_RegDef_t* pGPIOx)
 {
     return (uint16_t)pGPIOx->IDR;
 }
+
+
+void GPIO_IRQHandler(uint8_t pinNuber){
+    EXTI->PR = (1U << pinNuber);
+    
+}

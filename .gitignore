@@ -1,2 +1,41 @@
-build
-!.settings
+# # Prerequisites
+# *.d
+# *.crf
+# *.o
+# *.obj
+
+# # Toolchain / Build Outputs
+# Build/
+# build/
+# Release/
+# Debug/
+
+# # STM32CubeIDE specific
+# .settings/
+# .project
+# .cproject
+
+# # VS Code specific
+# .vscode/
+# .clang-format
+
+# # STM32CubeMX backups
+# ~*
+
+# --- Build Outputs ---
+*.o
+*.d
+*.elf
+*.bin
+*.hex
+*.map
+build/
+Build/
+Debug/
+Release/
+
+# --- IDE Specific Files ---
+.project
+.cproject
+.settings/
+.vscode/
