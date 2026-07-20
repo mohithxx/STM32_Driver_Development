@@ -33,6 +33,7 @@ build/
 Build/
 Debug/
 Release/
+config_default/
 
 # --- IDE Specific Files ---
 .project

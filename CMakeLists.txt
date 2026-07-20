@@ -97,7 +97,9 @@ include("cmake/vscode_generated.cmake")
 link_directories(${CMAKE_PROJECT_NAME} ${link_DIRS})
 
 # Create an executable object type
-add_executable(${CMAKE_PROJECT_NAME})
+add_executable(${CMAKE_PROJECT_NAME}
+ Drivers/Inc/I2C.h
+ Drivers/Src/I2C.c)
 
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PUBLIC ${sources_SRCS})

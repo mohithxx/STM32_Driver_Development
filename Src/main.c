@@ -35,61 +35,64 @@ void SPI1_IRQHandler(SPI_Handler *pSPIx)
 
 int main(void)
 {
-    GPIO_Handle_t spiPin;
-    SPI_Handler master;
+    // GPIO_Handle_t spiPin;
+    // SPI_Handler master;
 
-    spiPin.GPIOx = GPIOB;
-    spiPin.pinConfig.GPIO_PinMode = GPIO_MODE_AF;
-    spiPin.pinConfig.GPIO_PinOPType = GPIO_OTYPE_PP;
-    spiPin.pinConfig.GPIO_PinPuPd_control = GPIO_PULL_NONE;
-    spiPin.pinConfig.GPIO_PinSpeed = GPIO_SPEED_HIGH;
-    spiPin.pinConfig.GPIO_AltFuncMode = 5;
+    // spiPin.GPIOx = GPIOB;
+    // spiPin.pinConfig.GPIO_PinMode = GPIO_MODE_AF;
+    // spiPin.pinConfig.GPIO_PinOPType = GPIO_OTYPE_PP;
+    // spiPin.pinConfig.GPIO_PinPuPd_control = GPIO_PULL_NONE;
+    // spiPin.pinConfig.GPIO_PinSpeed = GPIO_SPEED_HIGH;
+    // spiPin.pinConfig.GPIO_AltFuncMode = 5;
 
-    GPIO_ClockControl(GPIOB, ENABLE); // Turn on clock first!
+    // GPIO_ClockControl(GPIOB, ENABLE); // Turn on clock first!
   
 
-    spiPin.pinConfig.GPIO_PinNumber = PIN_13; // SCLK
-    GPIO_init(&spiPin);
+    // spiPin.pinConfig.GPIO_PinNumber = PIN_13; // SCLK
+    // GPIO_init(&spiPin);
 
-    spiPin.pinConfig.GPIO_PinNumber = PIN_15; // MOSI
-    GPIO_init(&spiPin);
+    // spiPin.pinConfig.GPIO_PinNumber = PIN_15; // MOSI
+    // GPIO_init(&spiPin);
 
-    spiPin.pinConfig.GPIO_PinNumber = PIN_14; // MISO
-    GPIO_init(&spiPin);
+    // spiPin.pinConfig.GPIO_PinNumber = PIN_14; // MISO
+    // GPIO_init(&spiPin);
 
-    spiPin.pinConfig.GPIO_PinNumber = PIN_12; // NSS
-    GPIO_init(&spiPin);
+    // spiPin.pinConfig.GPIO_PinNumber = PIN_12; // NSS
+    // GPIO_init(&spiPin);
     
 
-    master.pConfig.SPI_DeviceMode = MASTER;
-    master.pConfig.SPI_BusConfig = FULL_DUPLEX;
-    master.pConfig.CPHA = CPOL_IDLE_LOW;
-    master.pConfig.CPOL = CPHA_FIRST_EDGE;
-    master.pConfig.SSM = SSM_EN;
-    master.pConfig.Speed = FCLK_8;
-    master.pConfig.SPI_DFF = DFF_8B;
-    master.pSPIx = SPI1;
+    // master.pConfig.SPI_DeviceMode = MASTER;
+    // master.pConfig.SPI_BusConfig = FULL_DUPLEX;
+    // master.pConfig.CPHA = CPOL_IDLE_LOW;
+    // master.pConfig.CPOL = CPHA_FIRST_EDGE;
+    // master.pConfig.SSM = SSM_EN;
+    // master.pConfig.Speed = FCLK_8;
+    // master.pConfig.SPI_DFF = DFF_8B;
+    // master.pSPIx = SPI1;
 
-    SPI_init(&master);
-    SPI_ClockControl(&master, ENABLE);
+    // SPI_init(&master);
+    // SPI_ClockControl(&master, ENABLE);
 
-    char buffer[] = "Hello";
-    int size = sizeof(buffer) / sizeof(buffer[0]);
+    // char buffer[] = "Hello";
+    // int size = sizeof(buffer) / sizeof(buffer[0]);
 
-    // SPI_Send(&master, (uint8_t*)buffer, size);
+    // // SPI_Send(&master, (uint8_t*)buffer, size);
 
-    NVIC_IRQ_PrioConfig(IRQ_NO_SPI1, 2);
-    NVIC_IRQConfig(IRQ_NO_SPI1, ENABLE);
+    // NVIC_IRQ_PrioConfig(IRQ_NO_SPI1, 2);
+    // NVIC_IRQConfig(IRQ_NO_SPI1, ENABLE);
 
-    SPI_SendDataIT(&master, (uint8_t *)buffer, size);
+    // SPI_SendDataIT(&master, (uint8_t *)buffer, size);
 
-    // SPI_ReceiveDataIT(&master, (uint8_t*)buffer, size);
+    // // SPI_ReceiveDataIT(&master, (uint8_t*)buffer, size);
 
-    /* Loop forever */
-    for (;;)
-    {
-        // Application code goes here
-    }
+    // /* Loop forever */
+    // for (;;)
+    // {
+    //     // Application code goes here
+    // }
 
     return 0;
+
+
+    //Hoiiiiiiiiiiiiiii
 }

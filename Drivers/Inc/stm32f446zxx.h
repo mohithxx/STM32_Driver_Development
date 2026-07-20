@@ -376,5 +376,122 @@ typedef struct {
 #define SYSCFG_BASE_ADR (APB2_BASE_ADR + 0x3800U)
 #define SYSCFG          ((SYSCFG_RegDef_t*)SYSCFG_BASE_ADR)
 
+
+
+
+
+
+
+//***************************************I2C****************************************** */
+
+#define I2C1_BASE_ADR   (APB1_BASE_ADR + 0x5400U)
+#define I2C1            ((I2C_RegDef_t*)I2C1_BASE_ADR)  
+
+typedef struct {
+    _vol uint32_t CR1;
+    _vol uint32_t CR2;
+    _vol uint32_t OAR1;
+    _vol uint32_t OAR2;
+    _vol uint32_t DR;
+    _vol uint32_t SR1;
+    _vol uint32_t SR2;
+    _vol uint32_t CCR;
+    _vol uint32_t TRISE;
+    _vol uint32_t FLTR;
+} I2C_RegDef_t;
+
+#define I2C2_BASE_ADR   (APB1_BASE_ADR + 0x5800U)
+#define I2C2            ((I2C_RegDef_t*)I2C2_BASE_ADR)
+
+#define I2C3_BASE_ADR   (APB1_BASE_ADR + 0x5C00U)
+#define I2C3            ((I2C_RegDef_t*)I2C3_BASE_ADR)
+
+/* I2C Clock Control Macros */
+#define I2C1_CLK_EN()   (RCC->APB1ENR |= (1U << 21))
+#define I2C1_CLK_DI()   do{(RCC->APB1RSTR |= (1U << 21)); (RCC->APB1RSTR &= ~(1U << 21));}while(0)
+
+#define I2C2_CLK_EN()   (RCC->APB1ENR |= (1U << 22))
+#define I2C2_CLK_DI()   do{(RCC->APB1RSTR |= (1U << 22)); (RCC->APB1RSTR &= ~(1U << 22));}while(0)
+
+#define I2C3_CLK_EN()   (RCC->APB1ENR |= (1U << 23))
+#define I2C3_CLK_DI()   do{(RCC->APB1RSTR |= (1U << 23)); (RCC->APB1RSTR &= ~(1U << 23));}while(0)
+
+/* I2C Bit Position Definitions */
+/* I2C_CR1 */
+#define I2C_CR1_PE          0
+#define I2C_CR1_SMBUS       1
+#define I2C_CR1_SMBTYPE     3
+#define I2C_CR1_ENARP       4
+#define I2C_CR1_ENPEC       5
+#define I2C_CR1_ENGC        6
+#define I2C_CR1_NOSTRETCH   7
+#define I2C_CR1_START       8
+#define I2C_CR1_STOP        9
+#define I2C_CR1_ACK         10
+#define I2C_CR1_POS         11
+#define I2C_CR1_PEC         12
+#define I2C_CR1_ALERT       13
+#define I2C_CR1_SWRST       15
+
+/* I2C_CR2 */
+#define I2C_CR2_FREQ        0
+#define I2C_CR2_ITERREN     8
+#define I2C_CR2_ITEVTEN     9
+#define I2C_CR2_ITBUFEN     10
+#define I2C_CR2_DMAEN       11
+#define I2C_CR2_LAST        12
+
+/* I2C_SR1 */           
+#define I2C_SR1_SB          0
+#define I2C_SR1_ADDR        1
+#define I2C_SR1_BTF         2
+#define I2C_SR1_ADD10       3
+#define I2C_SR1_STOPF       4
+#define I2C_SR1_RxNE        6
+#define I2C_SR1_TxE         7
+#define I2C_SR1_BERR        8
+#define I2C_SR1_ARLO        9
+#define I2C_SR1_AF          10
+#define I2C_SR1_OVR         11
+#define I2C_SR1_PECERR      12
+#define I2C_SR1_TIMEOUT     14
+#define I2C_SR1_SMBALERT    15
+
+/* I2C_SR2*/
+#define I2C_SR2_MSL         0
+#define I2C_SR2_BUSY        1
+#define I2C_SR2_TRA         2
+#define I2C_SR2_GENCALL     4
+#define I2C_SR2_DUALF       7
+
+/* I2C_CCR */
+#define I2C_CCR_CCR         0
+#define I2C_CCR_DUTY        14
+#define I2C_CCR_FS          15
+
+/* I2C_TRISE */
+#define I2C_TRISE_TRISE     0
+
+/* I2C_FLTR */
+#define I2C_FLTR_DNF        0
+#define I2C_FLTR_ANOFF      1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #endif /* INC_STM32F446ZXX_H_ */
 
