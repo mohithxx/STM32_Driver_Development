@@ -476,7 +476,7 @@ typedef struct {
 #define I2C_FLTR_DNF        0
 #define I2C_FLTR_ANOFF      1
 
-
+#define I2C_CR1_PE          0
 
 
 

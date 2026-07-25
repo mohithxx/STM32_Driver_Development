@@ -35,15 +35,15 @@ void SPI1_IRQHandler(SPI_Handler *pSPIx)
 
 int main(void)
 {
-    // GPIO_Handle_t spiPin;
-    // SPI_Handler master;
+    GPIO_Handle_t spiPin;
+    SPI_Handler master;
 
-    // spiPin.GPIOx = GPIOB;
-    // spiPin.pinConfig.GPIO_PinMode = GPIO_MODE_AF;
-    // spiPin.pinConfig.GPIO_PinOPType = GPIO_OTYPE_PP;
-    // spiPin.pinConfig.GPIO_PinPuPd_control = GPIO_PULL_NONE;
-    // spiPin.pinConfig.GPIO_PinSpeed = GPIO_SPEED_HIGH;
-    // spiPin.pinConfig.GPIO_AltFuncMode = 5;
+    spiPin.GPIOx = GPIOB;
+    spiPin.pinConfig.GPIO_PinMode = GPIO_MODE_AF;
+    spiPin.pinConfig.GPIO_PinOPType = GPIO_OTYPE_PP;
+    spiPin.pinConfig.GPIO_PinPuPd_control = GPIO_PULL_NONE;
+    spiPin.pinConfig.GPIO_PinSpeed = GPIO_SPEED_HIGH;
+    spiPin.pinConfig.GPIO_AltFuncMode = 5;
 
     // GPIO_ClockControl(GPIOB, ENABLE); // Turn on clock first!
   
